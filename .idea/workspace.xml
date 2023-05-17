@@ -4,28 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e316155-e2c2-4b0c-bcea-fc4592f9eba8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Cats.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/GameField.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/MatchingSquare.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/MouseEvents.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Images/BlueCat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Images/King.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Images/Queen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Images/RedCat.png" afterDir="false" />
+    <list default="true" id="5e316155-e2c2-4b0c-bcea-fc4592f9eba8" name="Changes" comment="first">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Cats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Cats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MouseEvents.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,8 +108,16 @@
       <workItem from="1684181644030" duration="3828000" />
       <workItem from="1684230861689" duration="1856000" />
       <workItem from="1684232750822" duration="3853000" />
-      <workItem from="1684251259176" duration="7255000" />
+      <workItem from="1684251259176" duration="12889000" />
     </task>
+    <task id="LOCAL-00001" summary="first">
+      <created>1684331096620</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1684331096620</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,5 +133,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first" />
+    <option name="LAST_COMMIT_MESSAGE" value="first" />
   </component>
 </project>

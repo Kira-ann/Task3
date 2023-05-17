@@ -4,10 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyAdapter;
 
-public class Cats extends JPanel  implements ActionListener{
+public class Cats extends JPanel implements ActionListener{
     private byte goodJob = -1;
     private Image job;
     private int count = 0;
@@ -15,43 +13,40 @@ public class Cats extends JPanel  implements ActionListener{
     private Image redCat;
     private Image blueCat;
     private int mouseY;
-    private boolean[] movement = new boolean[2]; // 0 - ось Х; 1 - oсь Y, красная - 0, синяя - 1
-    private int[][] movement2 = new int[2][2];
+    private final boolean[] movement = new boolean[2]; // 0 - ось Х; 1 - oсь Y, красная - 0, синяя - 1
+    private final int[][] movement2 = new int[2][2];
     private int mouseX;
     private String where = "null";
     private boolean result = false;
     private final int[][] posion = new int[][] {{400,250}, {900,250}};  // 0 - ось Х; 1 - oсь Y, красная - 0, синяя - 1
-
     private byte numberFigure = 2;
     private int[] c = new int[]{0,0,0,0};
     @Override
-    public void actionPerformed(ActionEvent e) {}
+    public void actionPerformed(ActionEvent e) {
+    }
     class FieldKeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
-            System.out.println("hh");
             super.keyPressed(e);
             int key = e.getKeyCode();
-            if (key == KeyEvent.VK_LEFT) {
+            if(key == KeyEvent.VK_LEFT){
+                System.out.println('y');
                 where = "left";
             }
-            if (key == KeyEvent.VK_RIGHT) {
+            if(key == KeyEvent.VK_RIGHT){
                 where = "right";
             }
-            if (key == KeyEvent.VK_UP) {
+            if(key == KeyEvent.VK_UP){
                 where = "up";
             }
-            if (key == KeyEvent.VK_DOWN) {
+            if(key == KeyEvent.VK_DOWN){
                 where = "down";
             }
-            if (key == KeyEvent.VK_1) {
+            if(key == KeyEvent.VK_1){
                 numberFigure = 1;
-                System.out.println("tyty");
-                where = "null";
             }
-            if (key == KeyEvent.VK_2) {
+            if(key == KeyEvent.VK_2){
                 numberFigure = 2;
-                where = "null";
             }
             if (key == KeyEvent.VK_ENTER) {
                 result = !result;
@@ -59,10 +54,10 @@ public class Cats extends JPanel  implements ActionListener{
             }
             a();
             comparisonCats();
-            goodJob = -1;
             repaint();
         }
     }
+
     public class CustomListener implements MouseListener, MouseMotionListener{
         public void mouseClicked(MouseEvent e) {
             count++;
@@ -76,15 +71,15 @@ public class Cats extends JPanel  implements ActionListener{
                 movement[0] = false;
                 movement[1] = false;
             }
-            else if (xNull && yNull) {
-                movement2[0][0] = mouseX;
-                movement2[0][1] = mouseY;
-                movement[0] = !movement[0];
-            }
             else if (xOne && yOne) {
                 movement2[1][0] = mouseX;
                 movement2[1][1] = mouseY;
                 movement[1] = !movement[1];
+            }
+            else if (xNull && yNull) {
+                movement2[0][0] = mouseX;
+                movement2[0][1] = mouseY;
+                movement[0] = !movement[0];
             }
             if (count % 2 == 0) comparisonCats();
             repaint();
@@ -135,8 +130,15 @@ public class Cats extends JPanel  implements ActionListener{
         addKeyListener(new FieldKeyListener());
         addMouseMotionListener(new CustomListener());
         addMouseListener(new CustomListener());
+        newPosion();
         a();
         setFocusable(true);
+    }
+    private void newPosion(){
+        posion[0][0] = 400;
+        posion[0][1] = 250;
+        posion[1][0] = 900;
+        posion[1][1] = 250;
     }
     private void comparisonCats(){
         c[0] = posion[0][0] - posion[1][0];
