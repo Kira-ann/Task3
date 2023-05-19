@@ -44,9 +44,11 @@ public class Cats extends JPanel implements ActionListener{
             }
             if(key == KeyEvent.VK_1){
                 numberFigure = 1;
+                where = "null";
             }
             if(key == KeyEvent.VK_2){
                 numberFigure = 2;
+                where = "null";
             }
             if (key == KeyEvent.VK_ENTER) {
                 result = !result;
@@ -130,11 +132,11 @@ public class Cats extends JPanel implements ActionListener{
         addKeyListener(new FieldKeyListener());
         addMouseMotionListener(new CustomListener());
         addMouseListener(new CustomListener());
-        newPosion();
+        newPosition();
         a();
         setFocusable(true);
     }
-    private void newPosion(){
+    private void newPosition(){
         posion[0][0] = 400;
         posion[0][1] = 250;
         posion[1][0] = 900;

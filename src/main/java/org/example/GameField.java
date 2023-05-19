@@ -166,13 +166,13 @@ public class GameField extends JPanel  implements ActionListener{
         posion[0][0] = 800;
         posion[0][1] = 80;
         for (int i = 1; i < 4; i++){
-            posion[i][0] = posion[i-1][0] + 160;
+            posion[i][0] = posion[i-1][0] + 140;
             posion[i][1] = posion[i-1][1];
         }
         posion[4][0] = 800;
         posion[4][1] = 480;
         for (int i = 5; i < 8; i++){
-            posion[i][0] = posion[i-1][0] + 160;
+            posion[i][0] = posion[i-1][0] + 140;
             posion[i][1] = posion[i-1][1];
         }
     }

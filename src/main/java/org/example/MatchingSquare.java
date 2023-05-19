@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class MatchingSquare extends JPanel  implements ActionListener{
     private String where = "null";
     private int count = 0;
-    private byte goodJob = -1;
+    public byte goodJob = -1;
     private boolean result = false;
     private Image wrong;
     private Image job;
