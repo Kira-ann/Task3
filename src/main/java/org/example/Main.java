@@ -71,7 +71,7 @@ public class Main extends JFrame {
                 frameMenu.setVisible(false);
                 frameGF.setVisible(true);
                 frameGF.add(back, BorderLayout.EAST);
-                frameGF.add(new GameField());
+                frameGF.add(new Chess());
             }
         });
         back.addActionListener(new ActionListener() {

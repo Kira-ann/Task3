@@ -18,9 +18,9 @@ public class Cats extends JPanel implements ActionListener{
     private int mouseX;
     private String where = "null";
     private boolean result = false;
-    private final int[][] posion = new int[][] {{400,250}, {900,250}};  // 0 - ось Х; 1 - oсь Y, красная - 0, синяя - 1
+    public final int[][] position = new int[][] {{400,250}, {900,250}};  // 0 - ось Х; 1 - oсь Y, красная - 0, синяя - 1
     private byte numberFigure = 2;
-    private int[] c = new int[]{0,0,0,0};
+    private final int[] condition = new int[]{0,0,0,0};
     @Override
     public void actionPerformed(ActionEvent e) {
     }
@@ -65,10 +65,10 @@ public class Cats extends JPanel implements ActionListener{
             count++;
             mouseX = e.getX();
             mouseY = e.getY();
-            boolean xNull = mouseX > posion[0][0] && (mouseX < posion[0][0] + 150);
-            boolean yNull = mouseY > posion[0][1] && mouseY < posion[0][1] + 300;
-            boolean xOne = mouseX > posion[1][0] && (mouseX < posion[1][0] + 150);
-            boolean yOne = mouseY > posion[1][1] && mouseY < posion[1][1] + 300;
+            boolean xNull = mouseX > position[0][0] && (mouseX < position[0][0] + 150);
+            boolean yNull = mouseY > position[0][1] && mouseY < position[0][1] + 300;
+            boolean xOne = mouseX > position[1][0] && (mouseX < position[1][0] + 150);
+            boolean yOne = mouseY > position[1][1] && mouseY < position[1][1] + 300;
             if (xOne && yOne && xNull && yNull && (movement[0] || movement[1])){
                 movement[0] = false;
                 movement[1] = false;
@@ -110,15 +110,15 @@ public class Cats extends JPanel implements ActionListener{
             mouseY = e.getY();
             repaint();
             if (movement[0]) {
-                posion[0][0] += (mouseX - movement2[0][0]);
-                posion[0][1] += (mouseY - movement2[0][1]);
+                position[0][0] += (mouseX - movement2[0][0]);
+                position[0][1] += (mouseY - movement2[0][1]);
                 movement2[0][0] = mouseX;
                 movement2[0][1] = mouseY;
                 repaint();
             }
             if (movement[1]) {
-                posion[1][0] += mouseX - movement2[1][0];
-                posion[1][1] += mouseY - movement2[1][1];
+                position[1][0] += mouseX - movement2[1][0];
+                position[1][1] += mouseY - movement2[1][1];
                 movement2[1][0] = mouseX;
                 movement2[1][1] = mouseY;
                 repaint();
@@ -137,20 +137,21 @@ public class Cats extends JPanel implements ActionListener{
         setFocusable(true);
     }
     private void newPosition(){
-        posion[0][0] = 400;
-        posion[0][1] = 250;
-        posion[1][0] = 900;
-        posion[1][1] = 250;
+        position[0][0] = 400;
+        position[0][1] = 250;
+        position[1][0] = 900;
+        position[1][1] = 250;
     }
-    private void comparisonCats(){
-        c[0] = posion[0][0] - posion[1][0];
-        c[1] = posion[1][0] - posion[0][0];
-        c[2] = posion[0][1] - posion[1][1];
-        c[3] = posion[1][1] - posion[0][1];
+    public void comparisonCats(){     // публичный только для теста
+        condition[0] = position[0][0] - position[1][0];
+        condition[1] = position[1][0] - position[0][0];
+        condition[2] = position[0][1] - position[1][1];
+        condition[3] = position[1][1] - position[0][1];
         int ans = 0;
         for (int i = 0; i < 4; i++){
-            if (c[i] < 6 && c[i] > -6){
+            if (condition[i] < 6 && condition[i] > -6){
                 ans++;
+                System.out.println(condition[i]);
             }
         }
         if (ans == 4){
@@ -163,15 +164,15 @@ public class Cats extends JPanel implements ActionListener{
     protected void paintComponent(Graphics connectionFirst) {
         String[] name = new String[]{"right", "left", "up", "down"};
         super.paintComponent(connectionFirst);
-        connectionFirst.drawImage(redCat, posion[0][0], posion[0][1],this);
-        connectionFirst.drawImage(blueCat, posion[1][0], posion[1][1],this);
+        connectionFirst.drawImage(redCat, position[0][0], position[0][1],this);
+        connectionFirst.drawImage(blueCat, position[1][0], position[1][1],this);
         if (result) {
             Color write = new Color(255, 255, 255);
             connectionFirst.setColor(write);
             Font font = new Font("Tahoma", Font.BOLD | Font.ITALIC, 30);
             connectionFirst.setFont(font);
             for (int j = 0; j < 4; j++) {
-                connectionFirst.drawString(name[j] + ":  " +String.valueOf(c[j]), 50, 50 + j * 50);
+                connectionFirst.drawString(name[j] + ":  " +condition[j], 50, 50 + j * 50);
             }
         }
         if (goodJob == 1) {
@@ -194,16 +195,16 @@ public class Cats extends JPanel implements ActionListener{
 
     private void a() {
         if(where.equals("right")){
-            posion[numberFigure - 1][0] += 4;
+            position[numberFigure - 1][0] += 4;
         }
         if(where.equals("left")){
-            posion[numberFigure -1][0] -= 4;
+            position[numberFigure -1][0] -= 4;
         }
         if(where.equals("up")){
-            posion[numberFigure - 1][1] -= 4;
+            position[numberFigure - 1][1] -= 4;
         }
         if(where.equals("down")){
-            posion[numberFigure - 1][1] += 4;
+            position[numberFigure - 1][1] += 4;
         }
     }
     private void loadImages(){
@@ -215,6 +216,9 @@ public class Cats extends JPanel implements ActionListener{
         job = greatWork.getImage();
         ImageIcon badJob = new ImageIcon("C:\\Users\\kira1\\IdeaProjects\\TaskThree\\src\\main\\resources\\Images\\wrong.png");
         wrong = badJob.getImage();
+    }
+    public byte getGoodJob() {
+        return goodJob;
     }
 }
 

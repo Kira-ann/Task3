@@ -6,17 +6,17 @@ import java.awt.event.*;
 public class MatchingSquare extends JPanel  implements ActionListener{
     private String where = "null";
     private int count = 0;
-    public byte goodJob = -1;
+    private byte goodJob = -1;
     private boolean result = false;
     private Image wrong;
     private Image job;
-    private int mouseX;
-    private int mouseY;
+    public int mouseX;
+    public int mouseY;
     private boolean movement;
-    private int[] movement2 = new int[2];
-    private final int[] posion = new int[2];  // 0 - ось Х; 1 - oсь Y
+    private final int[] movement2 = new int[2];
+    public final int[] position = new int[2];  // 0 - ось Х; 1 - oсь Y
 
-    private int[] condition = new int[]{0,0,0,0};
+    private final int[] condition = new int[]{0,0,0,0};
     @Override
     public void actionPerformed(ActionEvent e) {}
     class FieldKeyListener extends KeyAdapter {
@@ -54,8 +54,8 @@ public class MatchingSquare extends JPanel  implements ActionListener{
             mouseX = e.getX();
             mouseY = e.getY();
             repaint();
-            boolean xNull = mouseX > posion[0] && (mouseX < posion[0] + 150);
-            boolean yNull = mouseY > posion[1] && mouseY < posion[1] + 300;
+            boolean xNull = mouseX > position[0] && (mouseX < position[0] + 150);
+            boolean yNull = mouseY > position[1] && mouseY < position[1] + 300;
             if (xNull && yNull) {
                 movement2[0] = mouseX;
                 movement2[1] = mouseY;
@@ -100,8 +100,8 @@ public class MatchingSquare extends JPanel  implements ActionListener{
             mouseY = e.getY();
             repaint();
             if (movement) {
-                posion[0] += (mouseX - movement2[0]);
-                posion[1] += (mouseY - movement2[1]);
+                position[0] += (mouseX - movement2[0]);
+                position[1] += (mouseY - movement2[1]);
                 movement2[0] = mouseX;
                 movement2[1] = mouseY;
                 repaint();
@@ -111,7 +111,7 @@ public class MatchingSquare extends JPanel  implements ActionListener{
 
     public MatchingSquare(){
         setBackground(Color.black);
-        newPosion();
+        newposition();
         addKeyListener(new FieldKeyListener());
         addMouseMotionListener(new CustomListener());
         addMouseListener(new CustomListener());
@@ -119,15 +119,15 @@ public class MatchingSquare extends JPanel  implements ActionListener{
         loadImages();
         moving();
     }
-    private void newPosion(){
-        posion[0] = 1000;
-        posion[1] = 300;
+    private void newposition(){
+        position[0] = 1000;
+        position[1] = 300;
     }
-    private void comparisonSquare(){
-        condition[2] = posion[1] - 300;
-        condition[3] = - posion[1] + 300;
-        condition[0] = - posion[0] + 248;
-        condition[1] = posion[0] - 248;
+    public void comparisonSquare(){
+        condition[2] = position[1] - 300;
+        condition[3] = - position[1] + 300;
+        condition[0] = - position[0] + 248;
+        condition[1] = position[0] - 248;
         int ans = 0;
         for (int i = 0; i < 4; i++){
             if (condition[i] < 6 && condition[i] > -6){
@@ -145,7 +145,7 @@ public class MatchingSquare extends JPanel  implements ActionListener{
         super.paintComponent(connectionFirst);
         Color RedColor = new Color(255, 0, 0);
         connectionFirst.setColor(RedColor);
-        connectionFirst.fillRect(posion[0], posion[1], 200, 200);
+        connectionFirst.fillRect(position[0], position[1], 200, 200);
         Color BlueColor = new Color(0, 0, 255);
         connectionFirst.setColor(BlueColor);
         connectionFirst.drawOval(198, 250,300, 300);
@@ -155,7 +155,7 @@ public class MatchingSquare extends JPanel  implements ActionListener{
         connectionFirst.setFont(font);
         if (result) {
             for (int j = 0; j < 4; j++) {
-                connectionFirst.drawString(name[j] + ":  " +String.valueOf(condition[j]), 900, 100 + j * 70);
+                connectionFirst.drawString(name[j] + ":  " + condition[j], 900, 100 + j * 70);
             }
         }
         if (goodJob == 1) {
@@ -169,16 +169,16 @@ public class MatchingSquare extends JPanel  implements ActionListener{
     }
     private void moving() {
         if(where.equals("right")){
-            posion[0] += 4;
+            position[0] += 4;
         }
         if(where.equals("left")){
-            posion[0] -= 4;
+            position[0] -= 4;
         }
         if(where.equals("up")){
-            posion[1] -= 4;
+            position[1] -= 4;
         }
         if(where.equals("down")){
-            posion[1] += 4;
+            position[1] += 4;
         }
     }
     private void loadImages(){
@@ -186,6 +186,9 @@ public class MatchingSquare extends JPanel  implements ActionListener{
         job = greatWork.getImage();
         ImageIcon badJob = new ImageIcon("C:\\Users\\kira1\\IdeaProjects\\TaskThree\\src\\main\\resources\\Images\\wrong.png");
         wrong = badJob.getImage();
+    }
+    public int getGoodJob() {
+        return goodJob;
     }
 }
 

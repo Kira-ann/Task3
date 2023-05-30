@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class GameField extends JPanel  implements ActionListener{
+public class Chess extends JPanel  implements ActionListener{
     private String where = "null";
     private int count = 0;
     private boolean result = false;
@@ -12,12 +12,12 @@ public class GameField extends JPanel  implements ActionListener{
     private Image job;
     private int mouseX;
     private int mouseY;
-    private boolean[] movement = new boolean[8];
-    private int[][] movement2 = new int[8][2];
-    private boolean[][] condition = new boolean[8][2];
+    private final boolean[] movement = new boolean[8];
+    private final int[][] movement2 = new int[8][2];
+    private final boolean[][] condition = new boolean[8][2];
     private Image figureFirst;
     private Image figureSecondly;
-    private final int[][] posion = new int[8][2];  // 0 - ось Х; 1 - oсь Y
+    public final int[][] position = new int[8][2];  // 0 - ось Х; 1 - oсь Y
     private final int[] comparison = new int[8];
     private byte numberFigure = 9;
     @Override
@@ -90,10 +90,10 @@ public class GameField extends JPanel  implements ActionListener{
             mouseY = e.getY();
             repaint();
             for (int i = 0; i < 8; i++){
-                condition[i][0] = mouseX > posion[i][0] && (mouseX < posion[i][0] + 120);
+                condition[i][0] = mouseX > position[i][0] && (mouseX < position[i][0] + 120);
             }
             for (int i = 0; i < 8; i++){
-                condition[i][1] = mouseY > posion[i][1] && mouseY < posion[i][1] + 250;
+                condition[i][1] = mouseY > position[i][1] && mouseY < position[i][1] + 250;
             }
             for (int i = 0; i < 8; i ++){
                 if (condition[i][0] && condition[i][1]) {
@@ -102,7 +102,6 @@ public class GameField extends JPanel  implements ActionListener{
                     movement[i] = !movement[i];
                 }
             }
-            System.out.println(count);
             if (count % 2 == 0 && count >= 16){
 
                 comparisonChess();
@@ -143,8 +142,8 @@ public class GameField extends JPanel  implements ActionListener{
             repaint();
             for (int i = 0; i < 8; i++){
                 if (movement[i]){
-                    posion[i][0] += (mouseX - movement2[i][0]);
-                    posion[i][1] += (mouseY - movement2[i][1]);
+                    position[i][0] += (mouseX - movement2[i][0]);
+                    position[i][1] += (mouseY - movement2[i][1]);
                     movement2[i][0] = mouseX;
                     movement2[i][1] = mouseY;
                     repaint();
@@ -152,36 +151,36 @@ public class GameField extends JPanel  implements ActionListener{
             }
         }
     }
-    public GameField() {
+    public Chess() {
         setBackground(Color.black);
         loadImages();
-        newPosion();
+        newposition();
         addKeyListener(new FieldKeyListener());
         addMouseMotionListener(new CustomListener());
         addMouseListener(new CustomListener());
         setFocusable(true);
         a();
     }
-    private void newPosion(){
-        posion[0][0] = 800;
-        posion[0][1] = 80;
+    private void newposition(){
+        position[0][0] = 800;
+        position[0][1] = 80;
         for (int i = 1; i < 4; i++){
-            posion[i][0] = posion[i-1][0] + 140;
-            posion[i][1] = posion[i-1][1];
+            position[i][0] = position[i-1][0] + 140;
+            position[i][1] = position[i-1][1];
         }
-        posion[4][0] = 800;
-        posion[4][1] = 480;
+        position[4][0] = 800;
+        position[4][1] = 480;
         for (int i = 5; i < 8; i++){
-            posion[i][0] = posion[i-1][0] + 140;
-            posion[i][1] = posion[i-1][1];
+            position[i][0] = position[i-1][0] + 140;
+            position[i][1] = position[i-1][1];
         }
     }
-    private void comparisonChess(){
+    public void comparisonChess(){
         for (int i = 0; i < 4; i++){
-            comparison[i] = 120 - posion[i][1];
+            comparison[i] = 120 - position[i][1];
         }
         for (int i = 4; i < 8; i++){
-            comparison[i] = 508 - posion[i][1];
+            comparison[i] = 508 - position[i][1];
         }
         int ans = 0;
         for (int i = 0; i < 8; i++){
@@ -204,10 +203,10 @@ public class GameField extends JPanel  implements ActionListener{
         chess.setFont(font);
         if(!result) {
             for (int i = 0; i < 4; i++) {
-                chess.drawImage(figureFirst, posion[i][0], posion[i][1], this);
+                chess.drawImage(figureFirst, position[i][0], position[i][1], this);
             }
             for (int i = 4; i < 8; i++) {
-                chess.drawImage(figureSecondly, posion[i][0], posion[i][1], this);
+                chess.drawImage(figureSecondly, position[i][0], position[i][1], this);
             }
             Color RedColor = new Color(255, 0, 0);
             chess.setColor(RedColor);
@@ -220,7 +219,7 @@ public class GameField extends JPanel  implements ActionListener{
             chess.setColor(white);
             String[] name = new String[]{"1", "2", "3", "4", "5", "6", "7", "8"};
             for (int j = 0; j < 8; j++) {
-                chess.drawString(name[j] + ":  " +String.valueOf(comparison[j]), 50, 100 + j * 70);
+                chess.drawString(name[j] + ":  " + comparison[j], 50, 100 + j * 70);
             }
         }
         if (goodJob == 1) {
@@ -235,18 +234,18 @@ public class GameField extends JPanel  implements ActionListener{
         }
     }
 
-    public void a() {
+    private void a() {
         if(where.equals("right")){
-            posion[numberFigure - 1][0] += 4;
+            position[numberFigure - 1][0] += 4;
         }
         if(where.equals("left")){
-            posion[numberFigure -1][0] -= 4;
+            position[numberFigure -1][0] -= 4;
         }
         if(where.equals("up")){
-            posion[numberFigure - 1][1] -= 4;
+            position[numberFigure - 1][1] -= 4;
         }
         if(where.equals("down")){
-            posion[numberFigure - 1][1] += 4;
+            position[numberFigure - 1][1] += 4;
         }
     }
 
@@ -259,5 +258,8 @@ public class GameField extends JPanel  implements ActionListener{
         job = greatWork.getImage();
         ImageIcon badJob = new ImageIcon("C:\\Users\\kira1\\IdeaProjects\\TaskThree\\src\\main\\resources\\Images\\wrong.png");
         wrong = badJob.getImage();
+    }
+    public int getGoodJob() {
+        return goodJob;
     }
 }
